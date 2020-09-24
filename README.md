@@ -1,68 +1,119 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# React lisp
 
-## Available Scripts
+A simple lisp machine for educational purposes.
 
-In the project directory, you can run:
+Define a procedure that takes three numbers as arguments and returns the sum squares of two large ones.
 
-### `npm start`
+```lisp
+(defun sqSum(x y) (+ (* x x) (* y y)))
+(defun max(x y) (cond ((< x y) y) (t x)))
+(defun main(x y z) (sqSum (max x y) (max y z)))
+(main 1 2 3)
+```
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+```lisp
+; sqrt
+(defun average(x y) (/ (+ x y) 2))
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+(defun square(x)  (* x x))
 
-### `npm test`
+(defun improve(guess x) (average guess (/ x guess)))
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+(defun abs(x) (cond ((< x 0) (- x)) ((= x 0) 0) ((> x 0) x)))
 
-### `npm run build`
+(defun good-enough?(guess x) (< (abs (- (square guess) x)) 0.001))
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+(defun sqrt-iter(guess x) (cond
+                            ((good-enough? guess x) guess)
+                            (t (sqrt-iter (improve guess x) x))
+                          )
+)
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+(defun sqrt(x) (sqrt-iter 1 x))
+(sqrt 9)
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```lisp
+;if
+(defun if(predicate then else)  (cond
+                                    (predicate then)
+                                    (t else)
+                                )
+ )
+ (if (= 2 3) 0 5)
+ (if (= 1 1) 0 5)
+```
 
-### `npm run eject`
+```lisp
+(defun factorial(n) (cond
+                        ((= n 1) 1)
+                        (t (* n (factorial (- n 1))))
+                    )
+)
+(factorial 5)
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+(defun factorial(n) (fact-iter 1 1 n))
+(defun fact-iter(product counter max-count) (cond
+                                                ((> counter max-count) product)
+                                                (t (fact-iter (* counter product) (+ counter 1) max-count)))
+)
+(factorial 6)
+```
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+how many ways can I exchange an amount of 1 dollar if there are coins of 50, 25, 10, 5 and 1 cent?
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+```lisp
+(defun first-denomination(kinds-of-coins) (cond
+                                                ((= kinds-of-coins 1) 1)
+                                                ((= kinds-of-coins 2) 5)
+                                                ((= kinds-of-coins 3) 10)
+                                                ((= kinds-of-coins 4) 25)
+                                                ((= kinds-of-coins 5) 50))
+)
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+(defun cc(amount kinds-of-coins) (cond ((= amount 0) 1)
+                                       ((or (< amount 0) (= kinds-of-coins 0)) 0)
+                                       (t (+
+                                            (cc amount (- kinds-of-coins 1))
+                                            (cc (- amount
+                                                   (first-denomination kinds-of-coins)) kinds-of-coins)))
+                                 )
+)
 
-## Learn More
+(defun count-change(amount) (cc amount 5))
+(count-change 100)
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+```lisp
+(defun expt(b n) (cond
+                        ((= n 0) 1)
+                        (t(* b (expt b (- n 1))))
+                 )
+)
+(expt 2 3)
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+(defun expt-iter(b counter product) (cond
+                                        ((= counter 0) product)
+                                        (t (expt-iter b (- counter 1) (* b product)))
+                                     )
+)
 
-### Code Splitting
+(defun expt(b n) (expt-iter b n 1))
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+(expt 2 3)
+```
 
-### Analyzing the Bundle Size
+```lisp
+(defun sum(term a next b) (cond
+                            ((> a b) 0)
+                            (t (+ (term a)
+                                  (sum term (next a) next b)))
+                          )
+)
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
+(defun inc(n) (+ n 1))
+(defun cube(x) (* x x x))
 
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+(defun sum-cubes(a b) (sum cube a inc b))
+(sum-cubes 1 10)
+```
