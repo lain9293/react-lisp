@@ -1,22 +1,22 @@
 {
   "files": {
     "main.css": "/react-lisp/static/css/main.eb95ce45.chunk.css",
-    "main.js": "/react-lisp/static/js/main.601762c0.chunk.js",
-    "main.js.map": "/react-lisp/static/js/main.601762c0.chunk.js.map",
+    "main.js": "/react-lisp/static/js/main.9514878f.chunk.js",
+    "main.js.map": "/react-lisp/static/js/main.9514878f.chunk.js.map",
     "runtime-main.js": "/react-lisp/static/js/runtime-main.6b2693b6.js",
     "runtime-main.js.map": "/react-lisp/static/js/runtime-main.6b2693b6.js.map",
-    "static/js/2.05980a30.chunk.js": "/react-lisp/static/js/2.05980a30.chunk.js",
-    "static/js/2.05980a30.chunk.js.map": "/react-lisp/static/js/2.05980a30.chunk.js.map",
+    "static/js/2.d748d89b.chunk.js": "/react-lisp/static/js/2.d748d89b.chunk.js",
+    "static/js/2.d748d89b.chunk.js.map": "/react-lisp/static/js/2.d748d89b.chunk.js.map",
     "index.html": "/react-lisp/index.html",
-    "precache-manifest.5b1de2d25678d09bebfc38240501050b.js": "/react-lisp/precache-manifest.5b1de2d25678d09bebfc38240501050b.js",
+    "precache-manifest.81ff9336e58bbc53e01aa2b5971fc8a7.js": "/react-lisp/precache-manifest.81ff9336e58bbc53e01aa2b5971fc8a7.js",
     "service-worker.js": "/react-lisp/service-worker.js",
     "static/css/main.eb95ce45.chunk.css.map": "/react-lisp/static/css/main.eb95ce45.chunk.css.map",
-    "static/js/2.05980a30.chunk.js.LICENSE.txt": "/react-lisp/static/js/2.05980a30.chunk.js.LICENSE.txt"
+    "static/js/2.d748d89b.chunk.js.LICENSE.txt": "/react-lisp/static/js/2.d748d89b.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.6b2693b6.js",
-    "static/js/2.05980a30.chunk.js",
+    "static/js/2.d748d89b.chunk.js",
     "static/css/main.eb95ce45.chunk.css",
-    "static/js/main.601762c0.chunk.js"
+    "static/js/main.9514878f.chunk.js"
   ]
 }
